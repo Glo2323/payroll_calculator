@@ -12,9 +12,7 @@ public class PayrollCalculatorApp {
 
         //?Creating Scanner
         Scanner input = new Scanner(System.in);
-
-        //?Creating a loop to go through all employee info
-
+        
 
             //?Try catch to get any errors
             try {
@@ -51,7 +49,9 @@ public class PayrollCalculatorApp {
                     System.out.printf("Employee Gross pay %.2f\n\n", employee.getGrossPay());
                 }
 
+                //!Catching the errors
             } catch (Exception e) {
+                System.out.println(e.getMessage());
 
                 System.out.println("Error reading employees.csv");
             }
