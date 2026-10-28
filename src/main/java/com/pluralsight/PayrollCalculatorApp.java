@@ -14,22 +14,33 @@ public class PayrollCalculatorApp {
         //?Creating Scanner
         Scanner input = new Scanner(System.in);
 
-        boolean menuApp = true;
-        while (menuApp) {
-            int command = displayMenu(input);
 
-            switch (command) {
-                case 1 -> Employees();
+        //*Asking what file they want to enter
+        System.out.println("Enter the name of the file to process: ");
 
-                case 3 -> menuApp = false;
-            }
+        String fileName = input.nextLine().trim();
+        if (fileName.equals("employees.csv")) {
+            employees();
+        }else {
+            addEmployees();
         }
+
+//        boolean menuApp = true;
+//        while (menuApp) {
+//            int command = displayMenu(input);
+//
+//            switch (command) {
+//                case 1 -> Employees();
+//                case 2 -> AddEmployees();
+//                case 3 -> menuApp = false;
+//            }
+//        }
 
 
     }
 
     //!Gathering employees from the file
-    public static void Employees(){
+    public static void employees(){
         //?Try catch to get any errors
         //* created buffer and file reader to access the file
         try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/employees.csv")))
@@ -69,6 +80,58 @@ public class PayrollCalculatorApp {
             System.out.println(e.getMessage());
 
             System.out.println("Error reading employees.csv");
+        }
+
+
+    }
+
+    //!Adding new employees
+    public static void addEmployees(){
+
+        Scanner sc = new Scanner(System.in);
+        //? Creating BufferWriter to be able to write in the file
+        System.out.println("Enter the name of the payroll file to create: ");
+        String outputFile = sc.nextLine().trim();
+
+        try (BufferedWriter bW = new BufferedWriter(new FileWriter(outputFile, true))){
+
+
+            //*Asking for employee info
+            String addEmployee = "yes";
+            while(addEmployee.equalsIgnoreCase("Yes")){
+
+                //?Creating Scanner
+                Scanner input = new Scanner(System.in);
+
+                System.out.print("Enter employee info Ex id|name|gross pay: ");
+
+                String employeeData;
+                bW.write( employeeData = input.nextLine());
+                bW.newLine();
+
+                //*Split the employeeInfo into each part
+                String[] employeeInfo = employeeData.split("\\|");
+
+
+                //*assigning the info to there part
+                int employeeId = Integer.parseInt(employeeInfo[0]);
+                String employeeName = employeeInfo[1];
+                double grossPay = Double.parseDouble(employeeInfo[2]);
+
+                System.out.println("Would you like to add other employee: ");
+
+                addEmployee = input.nextLine();
+
+
+            }
+
+
+
+
+
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());;
         }
 
 
