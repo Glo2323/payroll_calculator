@@ -80,19 +80,6 @@ public class PayrollCalculatorApp {
 
     }
 
-
-
-
-
-
-
-
-//        if (fileName.equals("employees.csv")) {
-//            employees();
-//        }else {
-//            addEmployees();
-//        }
-
 //        boolean menuApp = true;
 //        while (menuApp) {
 //            int command = displayMenu(input);
